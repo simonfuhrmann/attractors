@@ -36,10 +36,10 @@ class CurveGenerator {
   void scale_and_center();
   void simplify();
   void save_ply(const std::string& filename);
-  void clearCurve();
+  void clear_curve();
 
-  const Curve& getCurve() const;
-  void getFloatCurve(std::vector<math::Vec3f>* curve) const;
+  const Curve& get_curve() const;
+  void get_float_curve(std::vector<math::Vec3f>* curve) const;
 
  private:
   Options options_;

@@ -110,17 +110,17 @@ CurveGenerator::save_ply(const std::string& filename) {
 }
 
 void
-CurveGenerator::clearCurve() {
+CurveGenerator::clear_curve() {
   curve_.clear();
 }
 
 const CurveGenerator::Curve&
-CurveGenerator::getCurve() const {
+CurveGenerator::get_curve() const {
   return curve_;
 }
 
 void
-CurveGenerator::getFloatCurve(std::vector<math::Vec3f>* curve) const {
+CurveGenerator::get_float_curve(std::vector<math::Vec3f>* curve) const {
   curve->reserve(curve_.size());
   for (std::size_t i = 0; i < curve_.size(); ++i) {
     curve->push_back(curve_[i]);
