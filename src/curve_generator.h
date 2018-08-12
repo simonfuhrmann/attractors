@@ -1,5 +1,5 @@
-#ifndef MVE_ATTRACTORS_GENERATOR_HEADER
-#define MVE_ATTRACTORS_GENERATOR_HEADER
+#ifndef MVE_ATTRACTORS_CURVE_GENERATOR_HEADER
+#define MVE_ATTRACTORS_CURVE_GENERATOR_HEADER
 
 #include <functional>
 #include <vector>
@@ -11,7 +11,7 @@
  * in 3D space. The resulting curve can be scaled and centered into the unit
  * cube, and adaptively simplified to remove unnecessarily dense samples.
  */
-class Generator {
+class CurveGenerator {
  public:
   typedef math::Vec3d Point;
   typedef std::vector<Point> Curve;
@@ -31,7 +31,7 @@ class Generator {
   };
 
  public:
-  explicit Generator(const Options& options);
+  explicit CurveGenerator(const Options& options);
   void generate();
   void scale_and_center();
   void simplify();
@@ -44,4 +44,4 @@ class Generator {
   Curve curve_;
 };
 
-#endif /* MVE_ATTRACTORS_GENERATOR_HEADER */
+#endif /* MVE_ATTRACTORS_CURVE_GENERATOR_HEADER */

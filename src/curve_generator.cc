@@ -1,4 +1,4 @@
-#include "generator.h"
+#include "curve_generator.h"
 
 #include <iostream>
 
@@ -7,12 +7,12 @@
 #include "mve/mesh_io_ply.h"
 #include "mve/mesh.h"
 
-Generator::Generator(const Options& options) {
+CurveGenerator::CurveGenerator(const Options& options) {
   options_ = options;
 }
 
 void
-Generator::generate() {
+CurveGenerator::generate() {
   curve_.clear();
   curve_.resize(options_.iterations);
 
@@ -24,7 +24,7 @@ Generator::generate() {
 }
 
 void
-Generator::scale_and_center() {
+CurveGenerator::scale_and_center() {
   if (curve_.size() < 2) return;
 
   // Find AABB of the curve.
@@ -46,7 +46,7 @@ Generator::scale_and_center() {
 }
 
 void
-Generator::simplify() {
+CurveGenerator::simplify() {
   const double angle_threshold = options_.angle_threshold;
   const double squared_min_distance = MATH_POW2(options_.min_distance);
   const double squared_max_distance = MATH_POW2(options_.max_distance);
@@ -99,7 +99,7 @@ Generator::simplify() {
 }
 
 void
-Generator::save_ply(const std::string& filename) {
+CurveGenerator::save_ply(const std::string& filename) {
   mve::TriangleMesh::Ptr mesh = mve::TriangleMesh::create();
   mve::TriangleMesh::VertexList& verts = mesh->get_vertices();
   for (std::size_t i = 0; i < curve_.size(); ++i) {
@@ -109,7 +109,7 @@ Generator::save_ply(const std::string& filename) {
   mve::geom::save_ply_mesh(mesh, filename, ply_opts);
 }
 
-const Generator::Curve&
-Generator::getCurve() const {
+const CurveGenerator::Curve&
+CurveGenerator::getCurve() const {
   return curve_;
 }
