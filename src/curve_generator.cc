@@ -21,6 +21,9 @@ CurveGenerator::generate() {
     point = options_.generator(point, options_.delta);
     curve_[i] = point;
   }
+
+  std::cout << "Generated curve with " << curve_.size()
+      << " samples" << std::endl;
 }
 
 void
@@ -90,12 +93,16 @@ CurveGenerator::simplify() {
     i2 += 1;
   }
 
-  std::cout << "Curve simplified ("
-      << distance_deletions << " short distances, "
-      << distance_preservations << " points preserved, "
-      << angle_deletions << " small angles)" << std::endl;
-
   math::algo::vector_clean(delete_list, &curve_);
+
+  std::cout << "Simplified curve to " << curve_.size()
+      << " samples" << std::endl;
+  std::cout << "  Deleted " << distance_deletions
+      << " short distances" << std::endl;
+  std::cout << "  Deleted " << angle_deletions
+      << " small angles" << std::endl;
+  std::cout << "  Protected " << distance_preservations
+      << " samples" << std::endl;
 }
 
 void

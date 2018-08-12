@@ -34,8 +34,10 @@ Triangulator::triangulate(const std::vector<math::Vec3f>& curve) {
   connect_tube_segments(mv, verts_per_segment, &mf);
 
   // Add caps to the tube. Note: Must start with end cap!
-  triangulate_caps(verts_per_segment, false);
-  triangulate_caps(verts_per_segment, true);
+  if (options_.add_caps) {
+    triangulate_caps(verts_per_segment, false);
+    triangulate_caps(verts_per_segment, true);
+  }
 }
 
 mve::TriangleMesh::Ptr
