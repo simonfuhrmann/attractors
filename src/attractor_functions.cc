@@ -1,6 +1,5 @@
 #include "attractor_functions.h"
 
-
 math::Vec3d
 AttractorFunctions::aizawa(const math::Vec3d& vn, double dt)
 {

@@ -1,5 +1,5 @@
-#ifndef MVE_ATTRACTORS_ATTRACTOR_FUNCTIONS_HEADER
-#define MVE_ATTRACTORS_ATTRACTOR_FUNCTIONS_HEADER
+#ifndef ATTRACTORS_ATTRACTOR_FUNCTIONS_HEADER
+#define ATTRACTORS_ATTRACTOR_FUNCTIONS_HEADER
 
 #include "math/vector.h"
 
@@ -10,4 +10,4 @@ class AttractorFunctions {
   static math::Vec3d aizawa(const math::Vec3d& vn, double dt);
 };
 
-#endif /* MVE_ATTRACTORS_ATTRACTOR_FUNCTIONS_HEADER */
+#endif /* ATTRACTORS_ATTRACTOR_FUNCTIONS_HEADER */

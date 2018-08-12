@@ -1,5 +1,5 @@
-#ifndef MVE_ATTRACTORS_CURVE_GENERATOR_HEADER
-#define MVE_ATTRACTORS_CURVE_GENERATOR_HEADER
+#ifndef ATTRACTORS_CURVE_GENERATOR_HEADER
+#define ATTRACTORS_CURVE_GENERATOR_HEADER
 
 #include <functional>
 #include <vector>
@@ -13,7 +13,7 @@
  */
 class CurveGenerator {
  public:
-  typedef math::Vec3d Point;
+  typedef math::Vector<double, 3> Point;
   typedef std::vector<Point> Curve;
   typedef std::function<Point(const Point&, double)> GeneratorFn;
 
@@ -36,12 +36,14 @@ class CurveGenerator {
   void scale_and_center();
   void simplify();
   void save_ply(const std::string& filename);
+  void clearCurve();
 
   const Curve& getCurve() const;
+  void getFloatCurve(std::vector<math::Vec3f>* curve) const;
 
  private:
   Options options_;
   Curve curve_;
 };
 
-#endif /* MVE_ATTRACTORS_CURVE_GENERATOR_HEADER */
+#endif /* ATTRACTORS_CURVE_GENERATOR_HEADER */
