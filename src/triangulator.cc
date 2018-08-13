@@ -74,6 +74,8 @@ Triangulator::create_tube_profile(const math::Vec3f& pos,
     const math::Vec3f& y,
     mve::TriangleMesh::VertexList* verts) {
   const float thickness = options_.thickness;
+
+#if 1
   for (int i = 0; i < 20; ++i) {
     float xf = std::cos(static_cast<float>(i) / 20.0f * MATH_TAU);
     float yf = std::sin(static_cast<float>(i) / 20.0f * MATH_TAU);
@@ -81,6 +83,16 @@ Triangulator::create_tube_profile(const math::Vec3f& pos,
     verts->push_back(pos + tf * (x * xf + y * yf));
     verts->push_back(pos + tf * (x * xf + y * yf));
   }
+#endif
+
+#if 0
+  for (int i = 0; i < 20; ++i) {
+    float xf = std::cos(static_cast<float>(i) / 20.0f * MATH_TAU);
+    float yf = std::sin(static_cast<float>(i) / 20.0f * MATH_TAU);
+    float tf = thickness;
+    verts->push_back(pos + tf * (x * xf + y * yf));
+  }
+#endif
 }
 
 void

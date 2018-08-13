@@ -22,7 +22,7 @@ class CurveGenerator {
     GeneratorFn generator;
     double delta = 0.01;
     std::size_t iterations = 20000;
-    Point start = math::Vec3f(0.1, 0.0, 0.0);
+    Point start = Point(0.1, 0.0, 0.0);
 
     /* Simplification options (defaults for scaled and centered curve). */
     double angle_threshold = MATH_DEG2RAD(2.0);

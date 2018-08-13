@@ -1,8 +1,7 @@
 #include "attractor_functions.h"
 
 math::Vec3d
-AttractorFunctions::aizawa(const math::Vec3d& vn, double dt)
-{
+AttractorFunctions::aizawa(const math::Vec3d& v, double dt) {
   const double a = 0.95;
   const double b = 0.7;
   const double c = 0.6;
@@ -10,13 +9,25 @@ AttractorFunctions::aizawa(const math::Vec3d& vn, double dt)
   const double e = 0.25;
   const double f = 0.1;
 
-  math::Vec3d vn1;
-  vn1[0] = vn[0] + dt * ((vn[2] - b) * vn[0] - d * vn[1]);
-  vn1[1] = vn[1] + dt * (d * vn[0] + (vn[2] - b) * vn[1]);
-  vn1[2] = vn[2] + dt * (c
-      + a * vn[2]
-      - MATH_POW3(vn[2]) / 3.0
-      - (MATH_POW2(vn[0]) + MATH_POW2(vn[1])) * (1.0 + e * vn[2])
-      + f * vn[2] * MATH_POW3(vn[0]));
-  return vn1;
+  math::Vec3d v1;
+  v1[0] = v[0] + dt * ((v[2] - b) * v[0] - d * v[1]);
+  v1[1] = v[1] + dt * (d * v[0] + (v[2] - b) * v[1]);
+  v1[2] = v[2] + dt * (c
+      + a * v[2]
+      - MATH_POW3(v[2]) / 3.0
+      - (MATH_POW2(v[0]) + MATH_POW2(v[1])) * (1.0 + e * v[2])
+      + f * v[2] * MATH_POW3(v[0]));
+  return v1;
+}
+
+math::Vec3d
+AttractorFunctions::bouali(const math::Vec3d& v, double dt) {
+  const double a = 0.3;
+  const double s = 1.0;
+
+  math::Vec3d v1;
+  v1[0] = v[0] + dt * (v[0] * (4.0 - v[1]) + a * v[2]);
+  v1[1] = v[1] + dt * (-v[1] * (1.0 - MATH_POW2(v[0])));
+  v1[2] = v[2] + dt * (-v[0] * (1.5 - s * v[2]) - 0.05 * v[2]);
+  return v1;
 }

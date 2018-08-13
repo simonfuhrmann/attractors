@@ -60,9 +60,11 @@ main (int argc, char** argv)
 
   // Generate the curve sampling.
   CurveGenerator::Options generator_opts;
-  generator_opts.generator = AttractorFunctions::aizawa;
+  // generator_opts.generator = AttractorFunctions::aizawa;
+  generator_opts.generator = AttractorFunctions::bouali;
   generator_opts.delta = settings.time_delta;
   generator_opts.iterations = settings.iterations;
+  generator_opts.start = math::Vec3d(1.0, 0.1, 0.1);
   CurveGenerator generator(generator_opts);
   generator.generate();
   generator.scale_and_center();

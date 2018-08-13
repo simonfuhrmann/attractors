@@ -19,6 +19,10 @@ CurveGenerator::generate() {
   Point point = options_.start;
   for (std::size_t i = 0; i < options_.iterations; ++i) {
     point = options_.generator(point, options_.delta);
+    if (std::isnan(point[0]) || std::isnan(point[1]) || std::isnan(point[2])) {
+      std::cout << "NAN values in iteration " << i << std::endl;
+      break;
+    }
     curve_[i] = point;
   }
 
