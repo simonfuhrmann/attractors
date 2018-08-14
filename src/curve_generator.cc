@@ -1,5 +1,6 @@
 #include "curve_generator.h"
 
+#include <cstdlib>
 #include <iostream>
 
 #include "math/algo.h"
@@ -19,9 +20,11 @@ CurveGenerator::generate() {
   Point point = options_.start;
   for (std::size_t i = 0; i < options_.iterations; ++i) {
     point = options_.generator(point, options_.delta);
-    if (std::isnan(point[0]) || std::isnan(point[1]) || std::isnan(point[2])) {
-      std::cout << "NAN values in iteration " << i << std::endl;
-      break;
+    if (math::isnan(point)) {
+      std::cerr << "NAN values in iteration " << i << std::endl;
+      std::cerr << "  Wrong starting value? " << options_.start << std::endl;
+      std::cerr << "  Small/large delta? " << options_.delta << std::endl;
+      std::exit(1);
     }
     curve_[i] = point;
   }

@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "math/vector.h"
+#include "attractor_functions.h"
 
 /**
  * Class for sampling the attractor function and generating a 1D curve embedded
@@ -15,11 +16,10 @@ class CurveGenerator {
  public:
   typedef math::Vector<double, 3> Point;
   typedef std::vector<Point> Curve;
-  typedef std::function<Point(const Point&, double)> GeneratorFn;
 
   struct Options {
     /* Generator options. */
-    GeneratorFn generator;
+    AttractorFunctions::Type generator;
     double delta = 0.01;
     std::size_t iterations = 20000;
     Point start = Point(0.1, 0.0, 0.0);

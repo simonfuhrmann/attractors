@@ -12,6 +12,7 @@
 struct AppSettings {
   std::string curve_filename;
   std::string mesh_filename;
+  std::string function = "aizawa";
   double time_delta = 0.01;
   std::size_t iterations = 20000;
   bool simplify = false;
@@ -33,6 +34,7 @@ main (int argc, char** argv)
   args.set_description("A utility that samples an attractor function and "
       "outputs a triangulated version of the attractor curve.");
   args.add_option('c', "curve", true, "Save curve to file [disabled]");
+  args.add_option('f', "function", true, "The attractor function [aizawa]");
   args.add_option('s', "simplify", false, "Simplify the curve [false]");
   args.add_option('d', "delta", true, "The time delta between samples [0.01]");
   args.add_option('i', "iterations", true, "The number of samples [20000]");
@@ -44,6 +46,8 @@ main (int argc, char** argv)
   while (util::ArgResult const* arg = args.next_option()) {
     if (arg->opt->lopt == "curve") {
       settings.curve_filename = arg->arg;
+    } else if (arg->opt->lopt == "function") {
+      settings.function = arg->arg;
     } else if (arg->opt->lopt == "delta") {
       settings.time_delta = arg->get_arg<double>();
     } else if (arg->opt->lopt == "iterations") {
@@ -61,7 +65,7 @@ main (int argc, char** argv)
   // Generate the curve sampling.
   CurveGenerator::Options generator_opts;
   // generator_opts.generator = AttractorFunctions::aizawa;
-  generator_opts.generator = AttractorFunctions::bouali;
+  generator_opts.generator = AttractorFunctions::for_string(settings.function);
   generator_opts.delta = settings.time_delta;
   generator_opts.iterations = settings.iterations;
   generator_opts.start = math::Vec3d(1.0, 0.1, 0.1);
@@ -70,6 +74,8 @@ main (int argc, char** argv)
   generator.scale_and_center();
   if (settings.simplify) {
     generator.simplify();
+  } else {
+    std::cout << "SKIPPING curve simplification (enable with -s)." << std::endl;
   }
   if (!settings.curve_filename.empty()) {
     generator.save_ply(settings.curve_filename);
