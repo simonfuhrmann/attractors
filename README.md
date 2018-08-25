@@ -2,6 +2,8 @@
 
 This project contains code to generate geometry for strange attractors.
 
+![Burke-Shaw Attractor](https://i.imgur.com/q40xPBA.png)
+
 ## Background
 
 Strange attractors are a mathematical formulation to generate points in space
