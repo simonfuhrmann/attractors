@@ -29,3 +29,19 @@ This code provides functionality to generate this geometry.
   * Assigning a consistent local coordinate system to the samples
   * Producing a triangulation around the curve
 
+## Building
+
+The code depends on the MVE library and a few other small libraries. First,
+install MVE's dependencies. This command depends on your distribution.
+
+    $ sudo aptitiude install libpng-dev, libjpeg-dev, libtiff-dev
+
+ Clone the MVE repository and the attractors repository:
+
+    $ git clone https://github.com/simonfuhrmann/mve.git
+    $ git clone https://github.com/simonfuhrmann/attractors.git
+
+ Build MVE and attractors:
+
+    $ make -Cmve -j8
+    $ make -Cattractors/src -j8

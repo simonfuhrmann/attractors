@@ -25,7 +25,12 @@ class AttractorFunctions {
   // Good values: 0.005 / 20000
   static math::Vec3d burke_shaw(const math::Vec3d& v, double dt);
 
-  // Returns the attractor function corrsponding to function name.
+  // Chen-Celikovsky attractor function
+  // Start value: 1.0, 1.0, 1.0
+  // Good values: 0.001 / 20000
+  static math::Vec3d chen_celikovsky(const math::Vec3d& v, double dt);
+
+  // Returns the attractor function corresponding to function name.
   static Type for_string(const std::string& name);
 };
 

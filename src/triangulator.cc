@@ -1,5 +1,7 @@
 #include "triangulator.h"
 
+#include <iostream>
+
 #include "math/defines.h"
 #include "mve/mesh_io_ply.h"
 
@@ -16,9 +18,11 @@ Triangulator::triangulate(const std::vector<math::Vec3f>& curve) {
   mve::TriangleMesh::FaceList& mf = mesh_->get_faces();
 
   // Assign a local coordiante system to each vertex.
+  std::cout << "Computing local coordinate system..." << std::endl;
   compute_lcs(curve);
 
   // Create a triangulated tube.
+  std::cout << "Creating tube segments..." << std::endl;
   for (std::size_t i = 0; i < curve.size(); ++i) {
     // Create N vertices per curve vertex in the local coordinate system.
     const math::Vec3f d = (i == 0
@@ -30,10 +34,12 @@ Triangulator::triangulate(const std::vector<math::Vec3f>& curve) {
   }
 
   // Triangulate the tube by connecting neighboring segments.
+  std::cout << "Triangulating tube segments..." << std::endl;
   const std::size_t verts_per_segment = mv.size() / curve.size();
   connect_tube_segments(mv, verts_per_segment, &mf);
 
   // Add caps to the tube. Note: Must start with end cap!
+  std::cout << "Triangulating tube caps..." << std::endl;
   if (options_.add_caps) {
     triangulate_caps(verts_per_segment, false);
     triangulate_caps(verts_per_segment, true);
@@ -129,7 +135,9 @@ Triangulator::triangulate_caps(std::size_t verts_per_segment, bool tube_start) {
   mve::TriangleMesh::VertexList& verts = mesh_->get_vertices();
   mve::TriangleMesh::FaceList& faces = mesh_->get_faces();
   const std::size_t start_vert_id = verts.size();
-  const std::size_t copy_offset = tube_start ? 0 : verts.size() - verts_per_segment;
+  const std::size_t copy_offset = tube_start
+      ? 0
+      : verts.size() - verts_per_segment;
 
   // Duplicate the cap vertices.
   std::size_t num_cap_verts = 0;

@@ -14,6 +14,9 @@ CurveGenerator::CurveGenerator(const Options& options) {
 
 void
 CurveGenerator::generate() {
+  std::cout << "Generating curve with " << options_.iterations
+      << " samples" << std::endl;
+
   curve_.clear();
   curve_.resize(options_.iterations);
 
@@ -29,8 +32,6 @@ CurveGenerator::generate() {
     curve_[i] = point;
   }
 
-  std::cout << "Generated curve with " << curve_.size()
-      << " samples" << std::endl;
 }
 
 void

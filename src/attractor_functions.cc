@@ -44,10 +44,25 @@ AttractorFunctions::burke_shaw(const math::Vec3d& v, double dt) {
   return v1;
 }
 
+math::Vec3d
+AttractorFunctions::chen_celikovsky(const math::Vec3d& v, double dt) {
+  const double a = 36.0;
+  const double b = 3.0;
+  const double c = 20.0;
+
+  math::Vec3d v1;
+  v1[0] = v[0] + dt * (a * (v[1] - v[0]));
+  v1[1] = v[1] + dt * (-v[0] * v[2] + c * v[1]);
+  v1[2] = v[2] + dt * (v[0] * v[1] - b * v[2]);
+  return v1;
+}
+
 AttractorFunctions::Type
 AttractorFunctions::for_string(const std::string& name) {
   if (name == "aizawa") return aizawa;
   if (name == "bouali") return bouali;
   if (name == "burke-shaw") return burke_shaw;
+  if (name == "chen-celikovsky") return chen_celikovsky;
+
   return nullptr;
 }
