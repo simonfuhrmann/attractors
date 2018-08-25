@@ -68,7 +68,6 @@ main (int argc, char** argv)
   generator_opts.generator = AttractorFunctions::for_string(settings.function);
   generator_opts.delta = settings.time_delta;
   generator_opts.iterations = settings.iterations;
-  generator_opts.start = math::Vec3d(1.0, 0.1, 0.1);
   CurveGenerator generator(generator_opts);
   generator.generate();
   generator.scale_and_center();

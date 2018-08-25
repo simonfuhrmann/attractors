@@ -20,18 +20,18 @@ CurveGenerator::generate() {
   curve_.clear();
   curve_.resize(options_.iterations);
 
-  Point point = options_.start;
+  Point start = options_.generator(Point(0.0), 0.0);
+  Point point = start;
   for (std::size_t i = 0; i < options_.iterations; ++i) {
     point = options_.generator(point, options_.delta);
     if (math::isnan(point)) {
       std::cerr << "NAN values in iteration " << i << std::endl;
-      std::cerr << "  Wrong starting value? " << options_.start << std::endl;
+      std::cerr << "  Wrong starting value? " << start << std::endl;
       std::cerr << "  Small/large delta? " << options_.delta << std::endl;
       std::exit(1);
     }
     curve_[i] = point;
   }
-
 }
 
 void

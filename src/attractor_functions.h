@@ -11,7 +11,7 @@ class AttractorFunctions {
 
  public:
   // Aizawa attractor function
-  // Start value: 0.1, 0, 0
+  // Start value: 0.1, 0.0, 0.0
   // Good values: 0.01 / 20000  and 0.009 / 20000
   static math::Vec3d aizawa(const math::Vec3d& v, double dt);
 
@@ -31,9 +31,14 @@ class AttractorFunctions {
   static math::Vec3d chen_celikovsky(const math::Vec3d& v, double dt);
 
   // Chen-Lee attractor function
-  // Start value: 1.0, 0, 4.5
+  // Start value: 1.0, 0.0, 4.5
   // Good values: 0.004 / 20000
   static math::Vec3d chen_lee(const math::Vec3d& v, double dt);
+
+  // Dequan Li attractor function
+  // Start value: 0.349, 0, -0.16
+  // Good values: 0.001 / 75000
+  static math::Vec3d dequan_li(const math::Vec3d& v, double dt);
 
   // Returns the attractor function corresponding to function name.
   static Type for_string(const std::string& name);
