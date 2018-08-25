@@ -57,12 +57,26 @@ AttractorFunctions::chen_celikovsky(const math::Vec3d& v, double dt) {
   return v1;
 }
 
+math::Vec3d
+AttractorFunctions::chen_lee(const math::Vec3d& v, double dt) {
+  const double a = 5.0;
+  const double b = -10.0;
+  const double c = -0.38;
+
+  math::Vec3d v1;
+  v1[0] = v[0] + dt * (a * v[0] - v[1] * v[2]);
+  v1[1] = v[1] + dt * (b * v[1] + v[0] * v[2]);
+  v1[2] = v[2] + dt * (c * v[2] + v[0] * v[1] / 3.0);
+  return v1;
+}
+
 AttractorFunctions::Type
 AttractorFunctions::for_string(const std::string& name) {
   if (name == "aizawa") return aizawa;
   if (name == "bouali") return bouali;
   if (name == "burke-shaw") return burke_shaw;
   if (name == "chen-celikovsky") return chen_celikovsky;
+  if (name == "chen-lee") return chen_lee;
 
   return nullptr;
 }
